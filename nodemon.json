@@ -1,0 +1,7 @@
+{
+    "env": {
+        "NODE_ENV": "development",
+        "MONGODB_PATH": "mongodb://localhost:27017/",
+        "DB_NAME": "imobdb"
+    }
+}
