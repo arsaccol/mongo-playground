@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const signup_router = express.Router();
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -9,10 +9,10 @@ const User = require('../models/user');
 const url = require('url');
 const db_url = url.resolve(process.env.MONGODB_PATH, process.env.DB_NAME);
 
-router.use(express.json());
+signup_router.use(express.json());
 
 
-router.get('/', (req, res) => {
+signup_router.get('/', (req, res) => {
     //mongoose.connect(url.resolve(process.env.MONGODB_PATH, process.env.DB_NAME), {useNewUrlParser: true});
 
 
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // Expected route: /api/signup
-router.post('/', (req, res) => {
+signup_router.post('/', (req, res) => {
     const { email, username, name, password } = req.body;
     
     mongoose.connect(db_url, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -75,4 +75,4 @@ router.post('/', (req, res) => {
 
 
 
-module.exports = router;
+module.exports = signup_router;
