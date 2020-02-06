@@ -2,7 +2,6 @@ const express = require('express');
 const login_router = express.Router();
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
@@ -32,7 +31,6 @@ login_router.post('/', async (req, res) => {
             res.json(authenticated_user);
         }
         catch(err) {
-            console.log(err);
             res.status(500).json({
                 message: 'Login error',
                 error: err
