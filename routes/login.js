@@ -3,7 +3,7 @@ const login_router = express.Router();
 
 const mongoose = require('mongoose');
 
-const User = require('../models/user');
+const User = require('../models/user_model');
 
 const url = require('url');
 const db_url = url.resolve(process.env.MONGODB_PATH, process.env.DB_NAME);
