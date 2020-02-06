@@ -30,7 +30,14 @@ const user_model = mongoose.model('User', {
     registered_date: {
         type: Date,
         required: true
-    }
+    },
+    
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
 });
 
 module.exports = user_model;
