@@ -2,6 +2,7 @@ const express = require('express');
 const login_router = express.Router();
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
@@ -13,8 +14,32 @@ login_router.get('/', (req, res) => {
 });
 
 // Expected route: /api/login
-login_router.post('/', (req, res) => {
+login_router.post('/', async (req, res) => {
+    const {email, password} = req.body;
+    
+    mongoose.connect(db_url, {useNewUrlParser: true, useUnifiedTopology: true});
+    let db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    db.once('open', async () => {
+        const credentials = {
+            email: email,
+            password: password
+        };
+        
+        try {
+            const authenticated_user = await User.findByCredentials(email, password);
+            res.json(authenticated_user);
+        }
+        catch(err) {
+            console.log(err);
+            res.status(500).json({
+                message: 'Login error',
+                error: err
+            });
+        }
 
+    });
 });
 
 module.exports = login_router;
