@@ -2,6 +2,11 @@
     "env": {
         "NODE_ENV": "development",
         "MONGODB_PATH": "mongodb://localhost:27017/",
-        "DB_NAME": "imobdb"
+        "DB_NAME": "imobdb",
+        "JWT_KEY": "Who Are The Patriots?"
+    },
+    "events": {
+        "start": "node -e 'console.clear()'"
+
     }
 }
