@@ -10,11 +10,27 @@ const mongoose = require('mongoose');
 
 const user_model = mongoose.model('User', {
     _id: mongoose.Types.ObjectId,
-    email: String,
-    username: String,
-    name: String,
-    password: String,
-    registered_date: Date
+    email: { 
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+
+    registered_date: {
+        type: Date,
+        required: true
+    }
 });
 
 module.exports = user_model;
