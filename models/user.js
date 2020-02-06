@@ -1,13 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-//const userModel = mongoose.model('User', {
-//    _id: mongoose.Schema.Types.ObjectId,
-//    email: { type: mongoose.Schema.Types.email },
-//    username: { type: String },
-//    name: { type: mongoose.Schema.Types.name },
-//    password: { type: mongoose.Schema.Types.password }
-//});
 
 const user_schema = new mongoose.Schema({
     _id: mongoose.Types.ObjectId,
@@ -55,6 +48,7 @@ user_schema.statics.findByCredentials = async (email, password) => {
     else
         return user;
 };
+
 
 const user_model = mongoose.model('User', user_schema);
 
