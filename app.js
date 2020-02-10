@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const api_signup_route = require('./routes/signup');
-const api_login_route = require('./routes/login');
+require('./db/db');
+
+const api_users_router = require('./routes/users_router');
 
 async function main() {
     app.use(express.json());
 
-    app.use('/api/signup', api_signup_route);
-    app.use('/api/login', api_login_route);
+    app.use('/users', api_users_router);
 
 
     app.listen(port, () => console.log(`Listening on port ${port}`));
