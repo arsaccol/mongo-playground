@@ -37,6 +37,15 @@ user_schema.statics.findByCredentials = async (email, password) => {
         return user;
 };
 
+user_schema.statics.findByUsername = async(username) => {
+    const user = await user_model.findOne({username: username});
+    
+    if(!user)
+        throw new Error({error: `User with username ${username} not found`});
+    else
+        return user;
+};
+
 user_schema.pre('save', async function (next) {
     const user = this;
     if(user.isModified('password')) {
