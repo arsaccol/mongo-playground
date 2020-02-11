@@ -8,7 +8,11 @@ const User = require('../models/user_model');
 users_router.post('/login', async (req, res) => {
     // Assuming the express app uses the json middleware, I guess?
     // Perhaps it shouldn't matter all that much
+    
+    console.log(req.body);
+
     const {email, password} = req.body;
+    console.log(req.body);
     
     try {
         const authenticated_user = await User.findByCredentials(email, password);
@@ -31,16 +35,34 @@ users_router.post('/login', async (req, res) => {
 });
 
 users_router.get('/:username', auth, (req, res) => {
+    const payload = req.token_payload;
     const username = req.params.username;
+    
+    //res.status(200).json(
+    //    payload
+    //);
+    
+    res.status(200).json({
+        username: username
+    })
 
-    try {
-        const user_data = User.findByUsername(username);
-        res.status(200).json(user_data);
-    }
-    catch(err) {
-        console.log(err)
-        res.status(500).json(err);
-    }
+   
+    //if(username === payload.username) {
+    //    try {
+    //        const user_data = User.findByUsername(username);
+    //        res.status(200).json(user_data);
+    //    }
+    //    catch(err) {
+    //        console.log(err)
+    //        res.status(401).json(err);
+    //    }
+    //}
+    //else {
+    //    res.status(401).json({
+    //        status: 'Unauthorized',
+    //        message: `${payload.username} is not the same as ${username}`
+    //    })
+    //}
 });
 
 users_router.post('/signup', async (req, res) => {

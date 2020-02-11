@@ -57,7 +57,9 @@ user_schema.pre('save', async function (next) {
 
 user_schema.methods.generateAuthToken = async function() { 
     const user = this;
-    const token = jwt.sign({email: user.email, username: user.username}, process.env.JWT_KEY, {expiresIn: "1h"});
+    //const token = jwt.sign({email: user.email, username: user.username, login_date: Date.now()}, process.env.JWT_KEY, {expiresIn: "1h"});
+    // Disable token expiry for testing
+    const token = jwt.sign({email: user.email, username: user.username, login_date: Date.now()}, process.env.JWT_KEY);
     return token;
 };
 
