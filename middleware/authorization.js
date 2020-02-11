@@ -30,7 +30,7 @@ async function checkAuthorization(req, res, next) {
         }
     }
     else {
-        const err_msg = 'Authorization header missing or incorrect';
+        const err_msg = 'Authorization header missing or incorrect. Please provide a valid token';
         res.status(401).json({
 
             status: "Unauthorized",
