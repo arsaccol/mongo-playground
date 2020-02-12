@@ -34,7 +34,7 @@ async function checkAuthorization(req, res, next) {
         res.status(401).json({
 
             status: "Unauthorized",
-            uri: req.status.uri,
+            uri: req.originalUrl,
             message: err_msg
         });
     }

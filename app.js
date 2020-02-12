@@ -11,8 +11,11 @@ async function main() {
 
     app.use('/users', api_users_router);
 
-
     app.listen(port, () => console.log(`Listening on port ${port}`));
+    
+    app.use((req, res) => {
+        res.status(404).send("Route doesn't exist or isn't implemented");
+    });
 }
 
 (async () => {
