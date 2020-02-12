@@ -44,6 +44,25 @@ users_router.put('/:username', auth, (req, res) => {
 });
 
 
+users_router.get('/', auth, async(req, res) => {
+    try {
+        const users_list = await User.find();
+
+        const safe_users = users_list.map(user => {
+            const safe_user = user;
+            safe_user.password = undefined;
+            safe_user.__v = undefined
+            return safe_user;
+        });
+
+        res.status(200).json(safe_users);
+    }
+    catch(err) {
+        res.status(500).json(JSON.stringify(err));
+    }
+});
+
+
 users_router.get('/id/:userid', auth, async (req, res) => {
     const payload = req.token_payload;
     const userid = req.params.userid;
@@ -64,7 +83,7 @@ users_router.get('/id/:userid', auth, async (req, res) => {
     }
 });
 
-users_router.post('/signup', async (req, res) => {
+users_router.post('/', async (req, res) => {
     console.log('buga');
     
     
